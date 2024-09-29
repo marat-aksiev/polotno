@@ -31,8 +31,6 @@ const colors = [
     { index: 29, rgb: "rgb(30, 144, 255)" }         // Dodger Blue
 ];
 
-
-
 let age = 1;
 let points = 0;
 const pointsElem = document.querySelector('#points');
@@ -43,14 +41,17 @@ let isClickable = true;
 function getRandColor() {
     let color = {};
     color.index = Math.floor(Math.random() * colors.length);
-    while (playedColors.includes(color.index)) {
+
+    while (playedColors.some(c => c.index === color.index)) {
         color.index = Math.floor(Math.random() * colors.length);
     }
+
     color.rgb = colors[color.index].rgb;
     color.age = age;
     age++;
     playedColors.push(color);
-    return `${colors[color.index].rgb}`;
+
+    return colors[color.index].rgb;
 }
 
 const allCells = document.querySelectorAll('.cell');
@@ -95,11 +96,14 @@ function step(playerAt) {
     const color = getRandColor();
 
     if (cells.includes(playerAt)) {
+        for (let cell of cells) {
+            cell.style.backgroundColor = color;
+        }
         isPlay = false;
         isClickable = false;
         setTimeout(() => {
             alert('you lost!');
-        }, 150);
+        }, 150)
         age = 1;
         return;
     }
