@@ -31,19 +31,24 @@ const colors = [
     { name: "Dodger Blue", hex: "#1E90FF" }
 ];
 
+let age = 1;
 let points = 0;
 const pointsElem = document.querySelector('#points');
 let playedColors = [];
 let playerAt = null;
-let isClickable = true; // Add this flag
+let isClickable = true;
 
 function getRandColor() {
-    let index = Math.floor(Math.random() * colors.length);
-    while (playedColors.includes(index)) {
-        index = Math.floor(Math.random() * colors.length);
+    let color = {};
+    color.index = Math.floor(Math.random() * colors.length);
+    while (playedColors.includes(color.index)) {
+        color.index = Math.floor(Math.random() * colors.length);
     }
-    playedColors.push(index);
-    return `${colors[index].hex}`;
+    color.age = age;
+    age++;
+    playedColors.push(color);
+    console.log(color);
+    return `${colors[color.index].hex}`;
 }
 
 const allCells = document.querySelectorAll('.cell');
@@ -71,14 +76,14 @@ function nextStepCells() {
 
 polotno.addEventListener('click', () => {
     playedColors = [];
-    points = 0; // Reset points when the game restarts
-    pointsElem.innerText = points; // Update points display
+    points = 0;
+    pointsElem.innerText = points;
     const colorSelect = getRandColor();
     for (let cell of allCells) {
         cell.style.backgroundColor = colorSelect;
     }
     isPlay = true;
-    isClickable = true; // Reset to clickable
+    isClickable = true;
     boarderDefault();
 });
 
@@ -88,10 +93,11 @@ function step(playerAt) {
 
     if (cells.includes(playerAt)) {
         isPlay = false;
-        isClickable = false; // Set to unclickable
+        isClickable = false;
         setTimeout(() => {
             alert('you lost!');
         }, 150);
+        age = 1;
         return;
     }
 
@@ -99,8 +105,8 @@ function step(playerAt) {
         for (let cell of cells) {
             cell.style.backgroundColor = color;
         }
-        points++; // Increment points
-        pointsElem.innerText = points; // Update points display
+        points++;
+        pointsElem.innerText = points;
     }
 }
 
@@ -112,10 +118,14 @@ function boarderDefault() {
 
 for (let cell of allCells) {
     cell.addEventListener('click', (event) => {
-        if (!isClickable) return; // Check if clickable before proceeding
+        if (!isClickable) return;
         playerAt = event.target;
         boarderDefault();
         playerAt.style.borderColor = 'white';
         step(playerAt);
     });
+}
+
+function weight(playedColors) {
+    // if 5 colors, the oldest gives 5 points
 }
