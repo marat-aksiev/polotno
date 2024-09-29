@@ -1,35 +1,37 @@
 const colors = [
-    { name: "Red", hex: "#FF0000" },
-    { name: "Lime Green", hex: "#00FF00" },
-    { name: "Blue", hex: "#0000FF" },
-    { name: "Yellow", hex: "#FFFF00" },
-    { name: "Cyan", hex: "#00FFFF" },
-    { name: "Magenta", hex: "#FF00FF" },
-    { name: "Orange", hex: "#FFA500" },
-    { name: "Purple", hex: "#800080" },
-    { name: "Teal", hex: "#008080" },
-    { name: "Pink", hex: "#FFC0CB" },
-    { name: "Olive", hex: "#808000" },
-    { name: "Navy", hex: "#000080" },
-    { name: "Gold", hex: "#FFD700" },
-    { name: "Maroon", hex: "#800000" },
-    { name: "Turquoise", hex: "#40E0D0" },
-    { name: "Lavender", hex: "#E6E6FA" },
-    { name: "Dark Olive Green", hex: "#556B2F" },
-    { name: "Hot Pink", hex: "#FF69B4" },
-    { name: "Steel Blue", hex: "#4682B4" },
-    { name: "Khaki", hex: "#F0E68C" },
-    { name: "Dark Red", hex: "#8B0000" },
-    { name: "Deep Sky Blue", hex: "#00BFFF" },
-    { name: "Coral", hex: "#FF7F50" },
-    { name: "Forest Green", hex: "#228B22" },
-    { name: "Periwinkle", hex: "#CCCCFF" },
-    { name: "Royal Blue", hex: "#4169E1" },
-    { name: "Saddle Brown", hex: "#8B4513" },
-    { name: "Tomato", hex: "#FF6347" },
-    { name: "Spring Green", hex: "#00FF7F" },
-    { name: "Dodger Blue", hex: "#1E90FF" }
+    { index: 0, rgb: "rgb(255, 0, 0)" },            // Red
+    { index: 1, rgb: "rgb(0, 255, 0)" },            // Lime Green
+    { index: 2, rgb: "rgb(0, 0, 255)" },            // Blue
+    { index: 3, rgb: "rgb(255, 255, 0)" },          // Yellow
+    { index: 4, rgb: "rgb(0, 255, 255)" },          // Cyan
+    { index: 5, rgb: "rgb(255, 0, 255)" },          // Magenta
+    { index: 6, rgb: "rgb(255, 165, 0)" },          // Orange
+    { index: 7, rgb: "rgb(128, 0, 128)" },          // Purple
+    { index: 8, rgb: "rgb(0, 128, 128)" },          // Teal
+    { index: 9, rgb: "rgb(255, 192, 203)" },        // Pink
+    { index: 10, rgb: "rgb(128, 128, 0)" },         // Olive
+    { index: 11, rgb: "rgb(0, 0, 128)" },           // Navy
+    { index: 12, rgb: "rgb(255, 215, 0)" },         // Gold
+    { index: 13, rgb: "rgb(128, 0, 0)" },           // Maroon
+    { index: 14, rgb: "rgb(64, 224, 208)" },        // Turquoise
+    { index: 15, rgb: "rgb(230, 230, 250)" },       // Lavender
+    { index: 16, rgb: "rgb(85, 107, 47)" },         // Dark Olive Green
+    { index: 17, rgb: "rgb(255, 105, 180)" },       // Hot Pink
+    { index: 18, rgb: "rgb(70, 130, 180)" },        // Steel Blue
+    { index: 19, rgb: "rgb(240, 230, 140)" },       // Khaki
+    { index: 20, rgb: "rgb(139, 0, 0)" },           // Dark Red
+    { index: 21, rgb: "rgb(0, 191, 255)" },         // Deep Sky Blue
+    { index: 22, rgb: "rgb(255, 127, 80)" },        // Coral
+    { index: 23, rgb: "rgb(34, 139, 34)" },         // Forest Green
+    { index: 24, rgb: "rgb(204, 204, 255)" },       // Periwinkle
+    { index: 25, rgb: "rgb(65, 105, 225)" },        // Royal Blue
+    { index: 26, rgb: "rgb(139, 69, 19)" },         // Saddle Brown
+    { index: 27, rgb: "rgb(255, 99, 71)" },         // Tomato
+    { index: 28, rgb: "rgb(0, 255, 127)" },         // Spring Green
+    { index: 29, rgb: "rgb(30, 144, 255)" }         // Dodger Blue
 ];
+
+
 
 let age = 1;
 let points = 0;
@@ -44,11 +46,11 @@ function getRandColor() {
     while (playedColors.includes(color.index)) {
         color.index = Math.floor(Math.random() * colors.length);
     }
+    color.rgb = colors[color.index].rgb;
     color.age = age;
     age++;
     playedColors.push(color);
-    console.log(color);
-    return `${colors[color.index].hex}`;
+    return `${colors[color.index].rgb}`;
 }
 
 const allCells = document.querySelectorAll('.cell');
@@ -77,6 +79,7 @@ function nextStepCells() {
 polotno.addEventListener('click', () => {
     playedColors = [];
     points = 0;
+    age = 1;
     pointsElem.innerText = points;
     const colorSelect = getRandColor();
     for (let cell of allCells) {
@@ -105,7 +108,12 @@ function step(playerAt) {
         for (let cell of cells) {
             cell.style.backgroundColor = color;
         }
-        points++;
+        weightFunc();
+        for (let color of playedColors) {
+            if (playerAt.style.backgroundColor === color.rgb) {
+                points += (color.weight) - 1;
+            }
+        }
         pointsElem.innerText = points;
     }
 }
@@ -126,6 +134,10 @@ for (let cell of allCells) {
     });
 }
 
-function weight(playedColors) {
-    // if 5 colors, the oldest gives 5 points
+function weightFunc() {
+    let num = playedColors.length;
+    for (let color of playedColors) {
+        color.weight = num;
+        num--;
+    }
 }
