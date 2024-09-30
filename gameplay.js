@@ -63,18 +63,69 @@ for (let cell of allCells) {
 const polotno = document.querySelector(".polotno");
 let isPlay = true;
 
+function calculatePercentages(array) {
+    if (!array.length) return [];
+
+    const totalWeight = array.reduce((total, item) => total + item.weight, 0);
+
+    let percentages = array.map(item => ({
+        ...item,
+        percentage: Math.floor((item.weight / totalWeight) * 100)
+    }));
+
+    let percentageSum = percentages.reduce((sum, item) => sum + item.percentage, 0);
+
+    let difference = 100 - percentageSum;
+
+    for (let i = 0; i < difference; i++) {
+        percentages[i].percentage += 1;
+    }
+
+    return percentages;
+}
+
 function nextStepCells() {
-    const percentage = Math.floor(Math.random() * 16) + 10;
+    const weightedCells = calculatePercentages(playedColors); // Get the weighted percentages based on age
+    const totalCells = 64; // Total number of cells
+    const percentage = Math.floor(Math.random() * 16) + 10; // Random percentage between 10 and 25%
     const realNum = percentage / 100;
-    const numOfCells = Math.max(1, Math.floor(64 * realNum));
-    const cells = [];
-    while (cells.length < numOfCells) {
-        let nextCellIndex = Math.floor(Math.random() * 64);
-        if (!cells.includes(allCells[nextCellIndex])) {
-            cells.push(allCells[nextCellIndex]);
+    const numOfCells = Math.max(1, Math.floor(totalCells * realNum)); // Determine how many cells to change
+    const selectedCells = [];
+
+    function weightedRandomCell() {
+        // Create an array of cumulative weights
+        let cumulativeWeights = [];
+        let sum = 0;
+
+        for (let color of weightedCells) {
+            sum += color.percentage;
+            cumulativeWeights.push(sum);
+        }
+
+        // Pick a random number between 0 and 100
+        const rand = Math.random() * 100;
+
+        // Find the index where the random number fits in the cumulative weights
+        for (let i = 0; i < cumulativeWeights.length; i++) {
+            if (rand < cumulativeWeights[i]) {
+                return playedColors[i];
+            }
         }
     }
-    return cells;
+
+    while (selectedCells.length < numOfCells) {
+        // Pick a random color based on the weights
+        let nextColor = weightedRandomCell();
+
+        // Pick a random cell index matching that color
+        let cellIndex = Math.floor(Math.random() * totalCells);
+
+        if (!selectedCells.includes(allCells[cellIndex])) {
+            selectedCells.push(allCells[cellIndex]);
+        }
+    }
+
+    return selectedCells;
 }
 
 polotno.addEventListener('click', () => {
@@ -88,6 +139,7 @@ polotno.addEventListener('click', () => {
     }
     isPlay = true;
     isClickable = true;
+    sumOfWeights = 0;
     boarderDefault();
 });
 
@@ -105,6 +157,8 @@ function step(playerAt) {
             alert('you lost!');
         }, 150)
         age = 1;
+        sumOfWeights = 0;
+
         return;
     }
 
@@ -124,7 +178,7 @@ function step(playerAt) {
 
 function boarderDefault() {
     for (let cell of allCells) {
-        cell.style.borderColor = 'black';
+        cell.style.borderColor = '#1d3557';
     }
 }
 
@@ -145,3 +199,4 @@ function weightFunc() {
         num--;
     }
 }
+let sumOfWeights = 0;
