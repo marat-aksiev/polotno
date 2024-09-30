@@ -1,35 +1,36 @@
 const colors = [
-    { index: 0, rgb: "rgb(255, 0, 0)" },            // Red
-    { index: 1, rgb: "rgb(0, 255, 0)" },            // Lime Green
-    { index: 2, rgb: "rgb(0, 0, 255)" },            // Blue
-    { index: 3, rgb: "rgb(255, 255, 0)" },          // Yellow
-    { index: 4, rgb: "rgb(0, 255, 255)" },          // Cyan
-    { index: 5, rgb: "rgb(255, 0, 255)" },          // Magenta
-    { index: 6, rgb: "rgb(255, 165, 0)" },          // Orange
-    { index: 7, rgb: "rgb(128, 0, 128)" },          // Purple
-    { index: 8, rgb: "rgb(0, 128, 128)" },          // Teal
-    { index: 9, rgb: "rgb(255, 192, 203)" },        // Pink
-    { index: 10, rgb: "rgb(128, 128, 0)" },         // Olive
-    { index: 11, rgb: "rgb(0, 0, 128)" },           // Navy
-    { index: 12, rgb: "rgb(255, 215, 0)" },         // Gold
-    { index: 13, rgb: "rgb(128, 0, 0)" },           // Maroon
-    { index: 14, rgb: "rgb(64, 224, 208)" },        // Turquoise
-    { index: 15, rgb: "rgb(230, 230, 250)" },       // Lavender
-    { index: 16, rgb: "rgb(85, 107, 47)" },         // Dark Olive Green
-    { index: 17, rgb: "rgb(255, 105, 180)" },       // Hot Pink
-    { index: 18, rgb: "rgb(70, 130, 180)" },        // Steel Blue
-    { index: 19, rgb: "rgb(240, 230, 140)" },       // Khaki
-    { index: 20, rgb: "rgb(139, 0, 0)" },           // Dark Red
-    { index: 21, rgb: "rgb(0, 191, 255)" },         // Deep Sky Blue
-    { index: 22, rgb: "rgb(255, 127, 80)" },        // Coral
-    { index: 23, rgb: "rgb(34, 139, 34)" },         // Forest Green
-    { index: 24, rgb: "rgb(204, 204, 255)" },       // Periwinkle
-    { index: 25, rgb: "rgb(65, 105, 225)" },        // Royal Blue
-    { index: 26, rgb: "rgb(139, 69, 19)" },         // Saddle Brown
-    { index: 27, rgb: "rgb(255, 99, 71)" },         // Tomato
-    { index: 28, rgb: "rgb(0, 255, 127)" },         // Spring Green
-    { index: 29, rgb: "rgb(30, 144, 255)" }         // Dodger Blue
+    { index: 0, rgb: "rgb(244, 67, 54)" },          // Red
+    { index: 1, rgb: "rgb(76, 175, 80)" },          // Green
+    { index: 2, rgb: "rgb(33, 150, 243)" },         // Blue
+    { index: 3, rgb: "rgb(255, 235, 59)" },         // Yellow
+    { index: 4, rgb: "rgb(0, 188, 212)" },          // Cyan
+    { index: 5, rgb: "rgb(233, 30, 99)" },          // Pink
+    { index: 6, rgb: "rgb(255, 152, 0)" },          // Orange
+    { index: 7, rgb: "rgb(156, 39, 176)" },         // Purple
+    { index: 8, rgb: "rgb(0, 150, 136)" },          // Teal
+    { index: 9, rgb: "rgb(255, 193, 7)" },          // Amber
+    { index: 10, rgb: "rgb(205, 220, 57)" },        // Lime
+    { index: 11, rgb: "rgb(63, 81, 181)" },         // Indigo
+    { index: 12, rgb: "rgb(255, 87, 34)" },         // Deep Orange
+    { index: 13, rgb: "rgb(121, 85, 72)" },         // Brown
+    { index: 14, rgb: "rgb(96, 125, 139)" },        // Blue Grey
+    { index: 15, rgb: "rgb(238, 238, 238)" },       // Grey (light)
+    { index: 16, rgb: "rgb(158, 158, 158)" },       // Grey (medium)
+    { index: 17, rgb: "rgb(97, 97, 97)" },          // Grey (dark)
+    { index: 18, rgb: "rgb(3, 169, 244)" },         // Light Blue
+    { index: 19, rgb: "rgb(255, 64, 129)" },        // Hot Pink
+    { index: 20, rgb: "rgb(255, 160, 0)" },         // Amber Dark
+    { index: 21, rgb: "rgb(0, 131, 143)" },         // Cyan Dark
+    { index: 22, rgb: "rgb(173, 20, 87)" },         // Deep Pink
+    { index: 23, rgb: "rgb(67, 160, 71)" },         // Forest Green
+    { index: 24, rgb: "rgb(197, 202, 233)" },       // Lavender
+    { index: 25, rgb: "rgb(48, 63, 159)" },         // Royal Blue (Indigo)
+    { index: 26, rgb: "rgb(93, 64, 55)" },          // Saddle Brown
+    { index: 27, rgb: "rgb(239, 83, 80)" },         // Coral Red
+    { index: 28, rgb: "rgb(0, 230, 118)" },         // Spring Green
+    { index: 29, rgb: "rgb(41, 121, 255)" }         // Dodger Blue
 ];
+
 
 let age = 1;
 let points = 0;
