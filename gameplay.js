@@ -50,6 +50,16 @@ function getRandColor() {
     color.age = age;
     age++;
     playedColors.push(color);
+    if (playedColors.length === 30) {
+        let img = document.querySelector('#winner');
+        if (!img) {
+            img = document.createElement('img');
+            img.id = 'winner';
+            img.src = 'winner.png';
+            document.body.append(img);
+        }
+        img.style.display = 'block'; // Show the image
+    }
 
     return colors[color.index].rgb;
 }
@@ -146,6 +156,10 @@ polotno.addEventListener('click', () => {
     const img = document.querySelector('#gameOverImage');
     if (img) {
         img.style.display = 'none';
+    }
+    const img2 = document.querySelector('#winner');
+    if (img2) {
+        img2.style.display = 'none';
     }
 });
 

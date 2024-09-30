@@ -212,3 +212,16 @@ body {
     z-index: 9999;
     /* Slightly lower than .polotno to allow the button to stay on top */
 }
+
+#winner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 40%;
+    max-height: 40%;
+    display: none;
+    /* Hidden by default */
+    z-index: 9999;
+    /* Slightly lower than .polotno to allow the button to stay on top */
+}
