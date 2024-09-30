@@ -181,6 +181,10 @@ body {
     color: #1d3557;
 }
 
+#points {
+    color: #fb8500;
+}
+
 .row {
     display: flex;
     justify-content: center;
