@@ -141,6 +141,12 @@ polotno.addEventListener('click', () => {
     isClickable = true;
     sumOfWeights = 0;
     boarderDefault();
+
+    // Hide the image
+    const img = document.querySelector('#gameOverImage');
+    if (img) {
+        img.style.display = 'none';
+    }
 });
 
 function step(playerAt) {
@@ -153,9 +159,17 @@ function step(playerAt) {
         }
         isPlay = false;
         isClickable = false;
-        setTimeout(() => {
-            alert('you lost!');
-        }, 150)
+
+        // Create the image element
+        let img = document.querySelector('#gameOverImage');
+        if (!img) {
+            img = document.createElement('img');
+            img.id = 'gameOverImage';
+            img.src = 'game_over.png';
+            document.body.append(img);
+        }
+        img.style.display = 'block'; // Show the image
+
         age = 1;
         sumOfWeights = 0;
 

@@ -133,7 +133,14 @@ table {
 
 body {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    min-height: 100vh;
+    /* Ensure the body takes full viewport height */
+    margin: 0;
+    /* Remove default body margins */
     font-family: 'Courier New', Courier, monospace;
     background-color: #457b9d;
 }
@@ -146,6 +153,10 @@ body {
 }
 
 .polotno {
+    z-index: 10000;
+    /* Ensures the button stays on top */
+    position: relative;
+    /* Ensure z-index takes effect */
     display: inline-block;
     text-align: center;
     width: fit-content;
@@ -183,4 +194,17 @@ body {
     background-color: white;
     cursor: pointer;
     transition-duration: 100ms;
+}
+
+#gameOverImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+    /* Hidden by default */
+    z-index: 9999;
+    /* Slightly lower than .polotno to allow the button to stay on top */
 }
