@@ -31,7 +31,6 @@ const colors = [
     { index: 29, rgb: "rgb(41, 121, 255)" }         // Dodger Blue
 ];
 
-
 let age = 1;
 let points = 0;
 const pointsElem = document.querySelector('#points');
@@ -56,10 +55,10 @@ function getRandColor() {
         if (!img) {
             img = document.createElement('img');
             img.id = 'winner';
-            img.src = 'winner.png';
+            img.src = 'files/winner.png';
             document.body.append(img);
         }
-        img.style.display = 'block'; // Show the image
+        img.style.display = 'block';
     }
 
     return colors[color.index].rgb;
@@ -96,15 +95,14 @@ function calculatePercentages(array) {
 }
 
 function nextStepCells() {
-    const weightedCells = calculatePercentages(playedColors); // Get the weighted percentages based on age
-    const totalCells = 64; // Total number of cells
-    const percentage = Math.floor(Math.random() * 16) + 10; // Random percentage between 10 and 25%
+    const weightedCells = calculatePercentages(playedColors);
+    const totalCells = 64;
+    const percentage = Math.floor(Math.random() * 16) + 10;
     const realNum = percentage / 100;
-    const numOfCells = Math.max(1, Math.floor(totalCells * realNum)); // Determine how many cells to change
+    const numOfCells = Math.max(1, Math.floor(totalCells * realNum));
     const selectedCells = [];
 
     function weightedRandomCell() {
-        // Create an array of cumulative weights
         let cumulativeWeights = [];
         let sum = 0;
 
@@ -113,10 +111,8 @@ function nextStepCells() {
             cumulativeWeights.push(sum);
         }
 
-        // Pick a random number between 0 and 100
         const rand = Math.random() * 100;
 
-        // Find the index where the random number fits in the cumulative weights
         for (let i = 0; i < cumulativeWeights.length; i++) {
             if (rand < cumulativeWeights[i]) {
                 return playedColors[i];
@@ -125,10 +121,8 @@ function nextStepCells() {
     }
 
     while (selectedCells.length < numOfCells) {
-        // Pick a random color based on the weights
         let nextColor = weightedRandomCell();
 
-        // Pick a random cell index matching that color
         let cellIndex = Math.floor(Math.random() * totalCells);
 
         if (!selectedCells.includes(allCells[cellIndex])) {
@@ -153,7 +147,6 @@ polotno.addEventListener('click', () => {
     sumOfWeights = 0;
     boarderDefault();
 
-    // Hide the image
     const img = document.querySelector('#gameOverImage');
     if (img) {
         img.style.display = 'none';
@@ -175,15 +168,14 @@ function step(playerAt) {
         isPlay = false;
         isClickable = false;
 
-        // Create the image element
         let img = document.querySelector('#gameOverImage');
         if (!img) {
             img = document.createElement('img');
             img.id = 'gameOverImage';
-            img.src = 'game_over.png';
+            img.src = 'files/game_over.png';
             document.body.append(img);
         }
-        img.style.display = 'block'; // Show the image
+        img.style.display = 'block';
 
         age = 1;
         sumOfWeights = 0;
@@ -222,10 +214,9 @@ for (let cell of allCells) {
 }
 
 function weightFunc() {
-    let num = playedColors.length;
     for (let color of playedColors) {
-        color.weight = num;
-        num--;
+        color.weight = color.age;
     }
 }
+
 let sumOfWeights = 0;
