@@ -1,34 +1,34 @@
 const colors = [
-    { index: 0, rgb: "rgb(244, 67, 54)" },          // Red
-    { index: 1, rgb: "rgb(76, 175, 80)" },          // Green
-    { index: 2, rgb: "rgb(33, 150, 243)" },         // Blue
-    { index: 3, rgb: "rgb(255, 235, 59)" },         // Yellow
-    { index: 4, rgb: "rgb(0, 188, 212)" },          // Cyan
-    { index: 5, rgb: "rgb(233, 30, 99)" },          // Pink
-    { index: 6, rgb: "rgb(255, 152, 0)" },          // Orange
-    { index: 7, rgb: "rgb(156, 39, 176)" },         // Purple
-    { index: 8, rgb: "rgb(0, 150, 136)" },          // Teal
-    { index: 9, rgb: "rgb(255, 193, 7)" },          // Amber
-    { index: 10, rgb: "rgb(205, 220, 57)" },        // Lime
-    { index: 11, rgb: "rgb(63, 81, 181)" },         // Indigo
-    { index: 12, rgb: "rgb(255, 87, 34)" },         // Deep Orange
-    { index: 13, rgb: "rgb(121, 85, 72)" },         // Brown
-    { index: 14, rgb: "rgb(96, 125, 139)" },        // Blue Grey
-    { index: 15, rgb: "rgb(238, 238, 238)" },       // Grey (light)
-    { index: 16, rgb: "rgb(158, 158, 158)" },       // Grey (medium)
-    { index: 17, rgb: "rgb(97, 97, 97)" },          // Grey (dark)
-    { index: 18, rgb: "rgb(3, 169, 244)" },         // Light Blue
-    { index: 19, rgb: "rgb(255, 64, 129)" },        // Hot Pink
-    { index: 20, rgb: "rgb(255, 160, 0)" },         // Amber Dark
-    { index: 21, rgb: "rgb(0, 131, 143)" },         // Cyan Dark
-    { index: 22, rgb: "rgb(173, 20, 87)" },         // Deep Pink
-    { index: 23, rgb: "rgb(67, 160, 71)" },         // Forest Green
-    { index: 24, rgb: "rgb(197, 202, 233)" },       // Lavender
-    { index: 25, rgb: "rgb(48, 63, 159)" },         // Royal Blue (Indigo)
-    { index: 26, rgb: "rgb(93, 64, 55)" },          // Saddle Brown
-    { index: 27, rgb: "rgb(239, 83, 80)" },         // Coral Red
-    { index: 28, rgb: "rgb(0, 230, 118)" },         // Spring Green
-    { index: 29, rgb: "rgb(41, 121, 255)" }         // Dodger Blue
+    { index: 0, rgb: "rgb(244, 67, 54)" },
+    { index: 1, rgb: "rgb(76, 175, 80)" },
+    { index: 2, rgb: "rgb(33, 150, 243)" },
+    { index: 3, rgb: "rgb(255, 235, 59)" },
+    { index: 4, rgb: "rgb(0, 188, 212)" },
+    { index: 5, rgb: "rgb(233, 30, 99)" },
+    { index: 6, rgb: "rgb(255, 152, 0)" },
+    { index: 7, rgb: "rgb(156, 39, 176)" },
+    { index: 8, rgb: "rgb(0, 150, 136)" },
+    { index: 9, rgb: "rgb(255, 193, 7)" },
+    { index: 10, rgb: "rgb(205, 220, 57)" },
+    { index: 11, rgb: "rgb(63, 81, 181)" },
+    { index: 12, rgb: "rgb(255, 87, 34)" },
+    { index: 13, rgb: "rgb(121, 85, 72)" },
+    { index: 14, rgb: "rgb(96, 125, 139)" },
+    { index: 15, rgb: "rgb(238, 238, 238)" },
+    { index: 16, rgb: "rgb(158, 158, 158)" },
+    { index: 17, rgb: "rgb(97, 97, 97)" },
+    { index: 18, rgb: "rgb(3, 169, 244)" },
+    { index: 19, rgb: "rgb(255, 64, 129)" },
+    { index: 20, rgb: "rgb(255, 160, 0)" },
+    { index: 21, rgb: "rgb(0, 131, 143)" },
+    { index: 22, rgb: "rgb(173, 20, 87)" },
+    { index: 23, rgb: "rgb(67, 160, 71)" },
+    { index: 24, rgb: "rgb(197, 202, 233)" },
+    { index: 25, rgb: "rgb(48, 63, 159)" },
+    { index: 26, rgb: "rgb(93, 64, 55)" },
+    { index: 27, rgb: "rgb(239, 83, 80)" },
+    { index: 28, rgb: "rgb(0, 230, 118)" },
+    { index: 29, rgb: "rgb(41, 121, 255)" }
 ];
 
 let age = 1;
@@ -122,7 +122,6 @@ function nextStepCells() {
 
     while (selectedCells.length < numOfCells) {
         let nextColor = weightedRandomCell();
-
         let cellIndex = Math.floor(Math.random() * totalCells);
 
         if (!selectedCells.includes(allCells[cellIndex])) {
@@ -214,9 +213,10 @@ for (let cell of allCells) {
 }
 
 function weightFunc() {
+    let num = playedColors.length;
     for (let color of playedColors) {
-        color.weight = color.age;
+        color.weight = num;
+        num--;
     }
 }
-
 let sumOfWeights = 0;
